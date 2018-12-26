@@ -10,7 +10,7 @@ class GoodshelvesPlugin {
 
 	public function __construct( $plugin ) {
 		$this->plugin = $plugin;
-		$this->api = new GoodreadsApi( new \WP_Http() );
+		$this->api = new Goodreads\Api( new \WP_Http() );
 	}
 
 	public function init() {
