@@ -10,7 +10,7 @@ class GoodshelvesPlugin {
 
 	public function __construct( $plugin ) {
 		$this->plugin = $plugin;
-		$this->api = new Goodreads\Api( new \WP_Http() );
+		$this->api = new Goodreads\FeedApi();
 	}
 
 	public function init() {
@@ -18,8 +18,6 @@ class GoodshelvesPlugin {
 	}
 
 	public function shortcode( $attributes ) {
-		$this->api->set_key( '12345' );
-
 		$attributes = shortcode_atts( array(
 			'shelf' => '',
 			'user' => '',
@@ -35,7 +33,31 @@ class GoodshelvesPlugin {
 
 		$books = $this->api->user_review_list( $user_id, $attributes['shelf'] );
 
-		print_r( $books );
+		if ( ! is_wp_error( $books ) ) {
+			return $this->render_feed( $books );
+		}
+	}
+
+	public function render_feed( $feed ) {
+		$items = $feed->get_items();
+		$html = [];
+
+		foreach ( $items as $item ) {
+			$url = strtok( $item->link, '?' );
+
+			$html[] = sprintf(
+				'<li class="goodshelves-book">
+					<a href="%s" class="goodshelves-book__link">
+						<img src="%s" class="goodshelves-book__image" alt="%s" />
+					</a>
+				</li>',
+				esc_url( $url ),
+				esc_url( $item->book_image_url ),
+				esc_attr( $item->title )
+			);
+		}
+
+		return sprintf( '<ul>%s</ul>', implode( '', $html ) );
 	}
 
 }
