@@ -47,7 +47,7 @@ class GoodshelvesPlugin {
 			$link = strtok( $item->get_link(), '?' );
 
 			$html[] = sprintf(
-				'<li class="goodshelves-books__item">
+				'<li class="blocks-gallery-item goodshelves-books__item">
 					<a href="%s" class="goodshelves-books__link">
 						<img src="%s" class="goodshelves-books__image" alt="%s" />
 					</a>
@@ -59,7 +59,7 @@ class GoodshelvesPlugin {
 		}
 
 		return sprintf(
-			'<ul class="goodshelves-books">
+			'<ul class="wp-block-gallery columns-5 goodshelves-books">
 				%s
 			</ul>',
 			implode( '', $html )
