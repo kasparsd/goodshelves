@@ -44,7 +44,7 @@ class GoodshelvesPlugin {
 
 		foreach ( $items as $item ) {
 			$image_url = $item->get_item_tags( '', 'book_large_image_url' );
-			$url = strtok( $item->link, '?' );
+			$link = strtok( $item->get_link(), '?' );
 
 			$html[] = sprintf(
 				'<li class="goodshelves-books__item">
@@ -52,7 +52,7 @@ class GoodshelvesPlugin {
 						<img src="%s" class="goodshelves-books__image" alt="%s" />
 					</a>
 				</li>',
-				esc_url( $item->get_link() ),
+				esc_url( $link ),
 				esc_url( $image_url[0]['data'] ),
 				esc_attr( $item->get_title() )
 			);
