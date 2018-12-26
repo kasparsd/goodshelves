@@ -43,21 +43,27 @@ class GoodshelvesPlugin {
 		$html = [];
 
 		foreach ( $items as $item ) {
+			$image_url = $item->get_item_tags( '', 'book_large_image_url' );
 			$url = strtok( $item->link, '?' );
 
 			$html[] = sprintf(
-				'<li class="goodshelves-book">
-					<a href="%s" class="goodshelves-book__link">
-						<img src="%s" class="goodshelves-book__image" alt="%s" />
+				'<li class="goodshelves-books__item">
+					<a href="%s" class="goodshelves-books__link">
+						<img src="%s" class="goodshelves-books__image" alt="%s" />
 					</a>
 				</li>',
-				esc_url( $url ),
-				esc_url( $item->book_image_url ),
-				esc_attr( $item->title )
+				esc_url( $item->get_link() ),
+				esc_url( $image_url[0]['data'] ),
+				esc_attr( $item->get_title() )
 			);
 		}
 
-		return sprintf( '<ul>%s</ul>', implode( '', $html ) );
+		return sprintf(
+			'<ul class="goodshelves-books">
+				%s
+			</ul>',
+			implode( '', $html )
+		);
 	}
 
 }
