@@ -7,5 +7,10 @@
     "name": "Kaspars Dambis",
     "email": "hi@kaspars.net"
   }],
+  "autoload": {
+    "psr-4": {
+      "Preseto\\Goodshelves\\": "src/php/"
+    }
+  },
   "require": {}
 }
