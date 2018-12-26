@@ -1,13 +1,11 @@
 {
-    "name": "kasparsd/goodshelve",
-    "description": "WordPress plugin for sharing your Goodreads bookshelvess",
-    "type": "wordpress-plugin",
-    "license": "GPL-2.0-or-later",
-    "authors": [
-        {
-            "name": "Kaspars Dambis",
-            "email": "hi@kaspars.net"
-        }
-    ],
-    "require": {}
+  "name": "kasparsd/goodshelves",
+  "description": "WordPress plugin for sharing your Goodreads bookshelves",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "authors": [{
+    "name": "Kaspars Dambis",
+    "email": "hi@kaspars.net"
+  }],
+  "require": {}
 }
