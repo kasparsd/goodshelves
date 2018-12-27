@@ -49,12 +49,16 @@ class GoodshelvesPlugin {
 			$html[] = sprintf(
 				'<li class="blocks-gallery-item goodshelves-books__item">
 					<a href="%s" class="goodshelves-books__link">
-						<img src="%s" class="goodshelves-books__image" alt="%s" />
+						<figure>
+							<img src="%s" class="goodshelves-books__image" alt="%s" />
+							<figcaption>%s</figcaption>
+						</figure>
 					</a>
 				</li>',
 				esc_url( $link ),
 				esc_url( $image_url[0]['data'] ),
-				esc_attr( $item->get_title() )
+				esc_attr( $item->get_title() ),
+				esc_html( $item->get_title() )
 			);
 		}
 
