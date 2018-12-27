@@ -8,14 +8,7 @@ where `USERID` is your user ID (required) and `SHELF` is the name of the shelf t
 
 ## How it Works
 
-- Uses the [public Atom feeds]() instead of the Goodreads API. Your profile _must be public_ for this to work!
-
-- All responses are cached for 12 hours by default.
-
-
-## How it Works
-
-- Uses the [public Atom feeds]() instead of the Goodreads API. Your profile _must be public_ for this to work!
+- Uses the [public Atom feeds](https://www.goodreads.com/review/list_rss/67960994?shelf=read) instead of the Goodreads API. Your profile _must be public_ for this to work!
 
 - All responses are cached for 12 hours by default.
 
