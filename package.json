@@ -10,7 +10,6 @@
     "start": "wp-env start --xdebug=debug,coverage",
     "stop": "wp-env stop",
     "build": "npm-run-all2 build:*",
-    "build:php": "composer install --no-dev --optimize-autoloader",
-    "build:js": "wp-scripts build --source-path=js"
+    "build:php": "composer install --no-dev --optimize-autoloader"
   }
 }
