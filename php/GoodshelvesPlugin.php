@@ -43,17 +43,18 @@ class GoodshelvesPlugin {
 		), $attributes );
 
 		// TODO Sanitize user ID/name?
-		$user_id = $attributes['user'];
+		$user_id = (int) $attributes['user'];
+		$shelf_id = (string) $attributes['shelf'];
 
 		// TODO Show an error for logged-in users?
-		if ( empty( $user_id ) ) {
+		if ( empty( $user_id ) || empty( $shelf_id ) ) {
 			return null;
 		}
 
 		wp_enqueue_style( self::STYLE_HANDLE );
 
 		try {
-			$books = $this->api->user_review_list( (int) $user_id, (string) $attributes['shelf'] );
+			$books = $this->api->user_review_list( $user_id, $shelf_id );
 
 			return $this->render_feed( $books );
 		} catch ( \RuntimeException $e ) {
