@@ -2,22 +2,26 @@
 
 namespace Preseto\Goodshelves;
 
+use Preseto\Goodshelves\Goodreads\FeedApi;
+use SimplePie\SimplePie;
+
 class GoodshelvesPlugin {
 
-	protected $plugin;
+	protected Plugin $plugin;
 
-	protected $api;
+	protected FeedApi $api;
 
-	public function __construct( $plugin ) {
+	public function __construct( Plugin $plugin ) {
 		$this->plugin = $plugin;
-		$this->api = new Goodreads\FeedApi();
+
+		$this->api = new FeedApi();
 	}
 
 	public function init() {
 		add_shortcode( 'goodshelves', [ $this, 'shortcode' ] );
 	}
 
-	public function shortcode( $attributes ) {
+	public function shortcode( array $attributes ) {
 		$attributes = shortcode_atts( array(
 			'shelf' => '',
 			'user' => '',
@@ -28,17 +32,21 @@ class GoodshelvesPlugin {
 
 		// TODO Show an error for logged-in users?
 		if ( empty( $user_id ) ) {
-			return;
+			return null;
 		}
 
-		$books = $this->api->user_review_list( $user_id, $attributes['shelf'] );
+		try {
+			$books = $this->api->user_review_list( (int) $user_id, (string) $attributes['shelf'] );
 
-		if ( ! is_wp_error( $books ) ) {
 			return $this->render_feed( $books );
+		} catch ( \RuntimeException $e ) {
+			// TODO: Implement this.
 		}
+
+		return null;
 	}
 
-	public function render_feed( $feed ) {
+	public function render_feed( SimplePie $feed ) {
 		$items = $feed->get_items();
 		$html = [];
 
