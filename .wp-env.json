@@ -3,6 +3,7 @@
 	"core": "./wordpress",
   "testsEnvironment": false,
   "mappings": {
+    "wp-content/plugins/goodshelves": ".",
     "wp-content": "./wp-content"
   },
   "config": {

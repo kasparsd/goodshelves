@@ -1,0 +1,14 @@
+{
+	"configurations": [
+		{
+			"name": "XDebug",
+			"type": "php",
+			"request": "launch",
+			"port": 9003,
+			"pathMappings": {
+				"/var/www/html": "${workspaceFolder}/wordpress",
+				"/var/www/html/wp-content/plugins/goodshelves": "${workspaceFolder}"
+			},
+		}
+	]
+}
