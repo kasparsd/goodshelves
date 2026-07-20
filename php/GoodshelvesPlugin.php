@@ -11,6 +11,8 @@ class GoodshelvesPlugin {
 
 	protected FeedApi $api;
 
+	const string STYLE_HANDLE = 'goodshelves';
+
 	public function __construct( Plugin $plugin ) {
 		$this->plugin = $plugin;
 
@@ -18,7 +20,20 @@ class GoodshelvesPlugin {
 	}
 
 	public function init() {
+		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_scripts' ] );
+
 		add_shortcode( 'goodshelves', [ $this, 'shortcode' ] );
+	}
+
+	public function action_enqueue_scripts() {
+		wp_register_style(
+			self::STYLE_HANDLE,
+			null,
+			[
+				'wp-block-gallery', // inherit the styles.
+			],
+			null
+		);
 	}
 
 	public function shortcode( array $attributes ) {
@@ -34,6 +49,8 @@ class GoodshelvesPlugin {
 		if ( empty( $user_id ) ) {
 			return null;
 		}
+
+		wp_enqueue_style( self::STYLE_HANDLE );
 
 		try {
 			$books = $this->api->user_review_list( (int) $user_id, (string) $attributes['shelf'] );
