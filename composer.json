@@ -20,7 +20,8 @@
   },
   "require-dev": {
     "roots/wordpress": "^7.0",
-    "wpackagist-theme/twentytwentyfive": "^1.5"
+    "wpackagist-theme/twentytwentyfive": "^1.5",
+    "wpackagist-plugin/query-monitor": "^4.0"
   },
   "config": {
     "allow-plugins": {
