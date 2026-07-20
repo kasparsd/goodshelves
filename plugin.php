@@ -1,6 +1,7 @@
 <?php
 /**
  * Plugin Name: Goodshelves
+ * Description: Display your Goodreads bookshelves.
  * Version: 1.0.0
  */
 
