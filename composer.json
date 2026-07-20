@@ -21,12 +21,17 @@
   "require-dev": {
     "roots/wordpress": "^7.0",
     "wpackagist-theme/twentytwentyfive": "^1.5",
-    "wpackagist-plugin/query-monitor": "^4.0"
+    "wpackagist-plugin/query-monitor": "^4.0",
+    "wp-coding-standards/wpcs": "^3.4"
   },
   "config": {
+    "platform": {
+      "php": "7.4"
+    },
     "allow-plugins": {
       "roots/wordpress-core-installer": true,
-      "composer/installers": true
+      "composer/installers": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
     }
   }
 }
