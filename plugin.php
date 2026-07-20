@@ -1,6 +1,7 @@
 <?php
 /**
  * Plugin Name: Goodshelves
+ * Version: 1.0.0
  */
 
 namespace Preseto\Goodshelves;
