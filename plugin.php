@@ -19,6 +19,6 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) && ! class_exists( Plugin::
 }
 
 $plugin = new Plugin( __FILE__ );
-$goodshelve = new GoodshelvesPlugin( $plugin );
+$goodshelve = new Goodshelves_Plugin( $plugin );
 
 add_action( 'plugins_loaded', [ $goodshelve, 'init' ] );

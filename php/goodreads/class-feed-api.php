@@ -4,7 +4,7 @@ namespace Preseto\Goodshelves\Goodreads;
 
 use SimplePie\SimplePie;
 
-class FeedApi {
+class Feed_Api {
 
 	public function user_review_list( int $user_id, ?string $shelf = null ): SimplePie {
 		$args = [

@@ -2,21 +2,21 @@
 
 namespace Preseto\Goodshelves;
 
-use Preseto\Goodshelves\Goodreads\FeedApi;
+use Preseto\Goodshelves\Goodreads\Feed_Api;
 use SimplePie\SimplePie;
 
-class GoodshelvesPlugin {
+class Goodshelves_Plugin {
 
 	protected Plugin $plugin;
 
-	protected FeedApi $api;
+	protected Feed_Api $api;
 
 	const STYLE_HANDLE = 'goodshelves';
 
 	public function __construct( Plugin $plugin ) {
 		$this->plugin = $plugin;
 
-		$this->api = new FeedApi();
+		$this->api = new Feed_Api();
 	}
 
 	public function init() {

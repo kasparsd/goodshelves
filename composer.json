@@ -16,9 +16,9 @@
 		}
 	],
 	"autoload": {
-		"psr-4": {
-			"Preseto\\Goodshelves\\": "php/"
-		}
+		"classmap": [
+			"php/"
+		]
 	},
 	"require-dev": {
 		"phpcompatibility/phpcompatibility-wp": "^3.0@dev",
