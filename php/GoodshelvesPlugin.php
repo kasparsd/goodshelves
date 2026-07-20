@@ -11,7 +11,7 @@ class GoodshelvesPlugin {
 
 	protected FeedApi $api;
 
-	const string STYLE_HANDLE = 'goodshelves';
+	const STYLE_HANDLE = 'goodshelves';
 
 	public function __construct( Plugin $plugin ) {
 		$this->plugin = $plugin;
@@ -28,7 +28,7 @@ class GoodshelvesPlugin {
 	public function action_enqueue_scripts() {
 		wp_register_style(
 			self::STYLE_HANDLE,
-			null,
+			false,
 			[
 				'wp-block-gallery', // inherit the styles.
 			],
