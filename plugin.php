@@ -17,4 +17,4 @@ if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 $plugin = new Plugin( __FILE__ );
 $goodshelve = new GoodshelvesPlugin( $plugin );
 
-$goodshelve->init();
+add_action( 'plugins_loaded', [ $goodshelve, 'init' ] );
