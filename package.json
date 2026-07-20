@@ -12,7 +12,7 @@
     "cli": "wp-env run cli --env-cwd=wp-content/plugins/goodshelves",
     "lint": "npm-run-all2 lint:*",
     "lint:php": "composer lint",
-    "build": "npm-run-all2 build:*",
-    "build:php": "composer install --no-dev --optimize-autoloader"
+    "release": "npm-run-all2 release:*",
+    "release:php": "composer install --no-dev --optimize-autoloader"
   }
 }
