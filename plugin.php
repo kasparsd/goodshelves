@@ -3,6 +3,8 @@
  * Plugin Name: Goodshelves
  * Description: Display your Goodreads bookshelves.
  * Version: 1.0.0
+ * Update URI: https://updates.wpelevator.com/wp-json/update-pilot/v1/plugins
+ * Requires PHP: 7.4
  */
 
 namespace Preseto\Goodshelves;
