@@ -13,8 +13,8 @@ if ( ! function_exists( 'add_action' ) ) {
 	return; // Ensure WP core is loading the plugin.
 }
 
-// Only if global project-wide autoload is not present.
-if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
+// Only if global project-wide autoload is not available.
+if ( is_readable( __DIR__ . '/vendor/autoload.php' ) && ! class_exists( Plugin::class ) ) {
 	require_once __DIR__ . '/vendor/autoload.php';
 }
 
