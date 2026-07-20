@@ -1,0 +1,9 @@
+parameters:
+	tmpDir: .cache/phpstan
+	level: 5
+	paths:
+		- php
+		- plugin.php
+	scanDirectories:
+		- wordpress
+		- vendor

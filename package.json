@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "devDependencies": {
+    "@wordpress/env": "^11.11.0",
+    "@wordpress/scripts": "^33.0.0",
+    "npm-run-all2": "^9.0.2"
+  },
+  "scripts": {
+    "env": "wp-env",
+    "start": "wp-env start --xdebug=debug,coverage",
+    "stop": "wp-env stop",
+    "cli": "wp-env run cli --env-cwd=wp-content/plugins/goodshelves",
+    "lint": "npm-run-all2 lint:*",
+    "lint:php": "composer lint",
+    "release": "npm-run-all2 release:*",
+    "release:php": "composer install --no-dev --optimize-autoloader"
+  }
+}

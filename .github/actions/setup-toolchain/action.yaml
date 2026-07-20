@@ -1,0 +1,38 @@
+name: Setup toolchain
+description: Setup Node.js, PHP and install project dependencies
+
+inputs:
+  php-version:
+    description: PHP version
+    required: false
+    default: '7.4'
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v7
+      with:
+        node-version-file: .nvmrc
+        cache: npm
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ inputs.php-version }}
+        tools: composer:v2
+
+    - name: Setup cache for dependencies
+      uses: actions/cache@v6
+      with:
+        path: .cache
+        key: ${{ runner.os }}-cache-${{ hashFiles( 'composer.lock', 'package-lock.json', '.wp-env.json' ) }}
+        restore-keys: ${{ runner.os }}-cache-
+
+    - name: Install tooling
+      shell: bash
+      run: npm install
+
+    - name: Install PHP dependencies
+      shell: bash
+      run: composer install

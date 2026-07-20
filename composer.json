@@ -1,16 +1,51 @@
 {
-  "name": "kasparsd/goodshelves",
-  "description": "WordPress plugin for sharing your Goodreads bookshelves",
-  "type": "wordpress-plugin",
-  "license": "GPL-2.0-or-later",
-  "authors": [{
-    "name": "Kaspars Dambis",
-    "email": "hi@kaspars.net"
-  }],
-  "autoload": {
-    "psr-4": {
-      "Preseto\\Goodshelves\\": "src/php/"
-    }
-  },
-  "require": {}
+	"name": "kasparsd/goodshelves",
+	"description": "WordPress plugin for sharing your Goodreads bookshelves",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://wpackagist.org",
+			"only": [
+				"wpackagist-plugin/*",
+				"wpackagist-theme/*"
+			]
+		}
+	],
+	"autoload": {
+		"classmap": [
+			"php/"
+		]
+	},
+	"require-dev": {
+		"phpcompatibility/phpcompatibility-wp": "^3.0@dev",
+		"phpstan/phpstan": "^2.2",
+		"roots/wordpress": "^7.0",
+		"wp-coding-standards/wpcs": "^3.4",
+		"wpackagist-plugin/query-monitor": "^4.0",
+		"wpackagist-theme/twentytwentyfive": "^1.5"
+	},
+	"config": {
+		"sort-packages": true,
+		"platform": {
+			"php": "7.4"
+		},
+		"allow-plugins": {
+			"roots/wordpress-core-installer": true,
+			"composer/installers": true,
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+	"scripts": {
+		"lint": [
+			"@lint:phpcs",
+			"@lint:phpstan"
+		],
+		"lint:phpcs": "phpcs",
+		"lint:phpstan": "phpstan analyse",
+		"format": "phpcbf"
+	}
 }

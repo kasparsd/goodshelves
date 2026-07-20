@@ -1,0 +1,37 @@
+name: Test
+
+on:
+  push:
+  workflow_call:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  WP_ENV_HOME: .cache/wp-env
+  COMPOSER_HOME: .cache/composer
+
+jobs:
+
+  test:
+    name: Lint and Test
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: write
+      checks: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup toolchain
+        uses: ./.github/actions/setup-toolchain
+
+      - name: Start the environment
+        run: npm run start
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build release
+        run: npm run release
