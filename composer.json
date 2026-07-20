@@ -9,7 +9,7 @@
   }],
   "autoload": {
     "psr-4": {
-      "Preseto\\Goodshelves\\": "src/php/"
+      "Preseto\\Goodshelves\\": "php/"
     }
   },
   "require": {}
