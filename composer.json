@@ -3,6 +3,8 @@
   "description": "WordPress plugin for sharing your Goodreads bookshelves",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "repositories": [
     {
       "type": "composer",
@@ -22,7 +24,8 @@
     "roots/wordpress": "^7.0",
     "wpackagist-theme/twentytwentyfive": "^1.5",
     "wpackagist-plugin/query-monitor": "^4.0",
-    "wp-coding-standards/wpcs": "^3.4"
+    "wp-coding-standards/wpcs": "^3.4",
+    "phpcompatibility/phpcompatibility-wp": "^3.0@dev"
   },
   "config": {
     "platform": {
@@ -33,5 +36,9 @@
       "composer/installers": true,
       "dealerdirect/phpcodesniffer-composer-installer": true
     }
+  },
+  "scripts": {
+    "lint": "phpcs",
+    "format": "phpcbf"
   }
 }
