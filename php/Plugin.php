@@ -58,14 +58,7 @@ class Plugin {
 		return $this->file;
 	}
 
-	/**
-	 * Get the file path relative to the WordPress plugin directory.
-	 *
-	 * @param  string $file_path Absolute path to any plugin file.
-	 *
-	 * @return string
-	 */
-	public function basename( ?string $file_path = null ) {
+	public function basename( ?string $file_path = null ): string {
 		if ( ! isset( $file_path ) ) {
 			$file_path = $this->file();
 		}
@@ -73,35 +66,49 @@ class Plugin {
 		return plugin_basename( $file_path );
 	}
 
-	/**
-	 * Get the public URL to the asset file.
-	 *
-	 * @param string $asset_path_relative Relative path to the asset file.
-	 */
-	public function asset_url( string $asset_path_relative ) {
-		static $plugin_basename;
+	public function get_asset_meta( string $relative_path ): array {
+		$meta = [
+			'url' => $this->asset_url( $relative_path ),
+			'path' => $this->asset_path( $relative_path ),
+			'dependencies' => [],
+			'version' => null,
+		];
 
-		// Do this only once per every request to save some processing time.
-		if ( ! isset( $plugin_basename ) ) {
-			$plugin_basename = $this->basename( $this->dir() );
-		}
-
-		$file_path = sprintf(
-			'%s/%s',
-			$plugin_basename,
-			ltrim( $asset_path_relative, '/' )
+		$meta_path = $this->asset_path(
+			sprintf(
+				'%s/%s.asset.php',
+				dirname( $relative_path ),
+				pathinfo( $relative_path, PATHINFO_FILENAME )
+			)
 		);
 
-		return plugins_url( $file_path );
+		if ( is_readable( $meta_path ) ) {
+			$build_meta = include $meta_path;
+
+			return array_merge( $meta, $build_meta );
+		} elseif ( is_readable( $meta['path'] ) ) {
+			$meta['version'] = filemtime( $meta['path'] );
+		}
+
+		return $meta;
 	}
 
-	/**
-	 * Get absolute path to a file in the uploads directory.
-	 *
-	 * @param string $path_relative File path relative to the root of the WordPress uploads directory.
-	 *
-	 * @return string
-	 */
+	public function asset_url( ?string $asset_path_relative = null ): string {
+		if ( isset( $asset_path_relative ) ) {
+			return plugins_url( $this->asset_path( $asset_path_relative ) );
+		}
+
+		return plugins_url( $this->dir() );
+	}
+
+	public function asset_path( ?string $asset_path_relative = null ): string {
+		if ( isset( $asset_path_relative ) ) {
+			return sprintf( '%s/%s', $this->dir(), ltrim( $asset_path_relative, '/' ) );
+		}
+
+		return $this->dir();
+	}
+
 	public function uploads_dir( ?string $path_relative = null ) {
 		if ( isset( $path_relative ) ) {
 			return sprintf( '%s/%s', $this->uploads_dir['basedir'], $path_relative );
@@ -110,13 +117,6 @@ class Plugin {
 		return $this->uploads_dir['basedir'];
 	}
 
-	/**
-	 * Get URL to a file in the uploads directory.
-	 *
-	 * @param  string $path_relative Path to the file relative to the root of the WordPress uploads directory.
-	 *
-	 * @return string
-	 */
 	public function uploads_dir_url( ?string $path_relative = null ) {
 		if ( isset( $path_relative ) ) {
 			return sprintf( '%s/%s', $this->uploads_dir['baseurl'], $path_relative );
@@ -125,22 +125,10 @@ class Plugin {
 		return $this->uploads_dir['baseurl'];
 	}
 
-	/**
-	 * Return the current version of the plugin.
-	 *
-	 * @return ?string
-	 */
 	public function version(): ?string {
 		return $this->meta( 'Version' );
 	}
 
-	/**
-	 * Get plugin meta data.
-	 *
-	 * @param  string $field Optional field key.
-	 *
-	 * @return array|string|null
-	 */
 	public function meta( ?string $field = null ) {
 		static $meta;
 
