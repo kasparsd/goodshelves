@@ -38,16 +38,16 @@ class GoodshelvesPlugin {
 
 	public function shortcode( array $attributes ) {
 		$attributes = shortcode_atts( array(
-			'shelf' => '',
+			'shelf' => null,
 			'user' => '',
 		), $attributes );
 
 		// TODO Sanitize user ID/name?
 		$user_id = (int) $attributes['user'];
-		$shelf_id = (string) $attributes['shelf'];
+		$shelf_id = $attributes['shelf'];
 
 		// TODO Show an error for logged-in users?
-		if ( empty( $user_id ) || empty( $shelf_id ) ) {
+		if ( empty( $user_id ) ) {
 			return null;
 		}
 

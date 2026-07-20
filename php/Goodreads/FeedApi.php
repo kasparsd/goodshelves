@@ -6,12 +6,14 @@ use SimplePie\SimplePie;
 
 class FeedApi {
 
-	public function user_review_list( int $user_id, string $shelf ): SimplePie {
+	public function user_review_list( int $user_id, ?string $shelf = null ): SimplePie {
+		$args = [
+			'shelf' => $shelf,
+		];
+
 		$url = $this->url(
 			sprintf( 'review/list_rss/%d', absint( $user_id ) ),
-			[
-				'shelf' => $shelf,
-			]
+			array_filter( $args )
 		);
 
 		return $this->get( $url );
