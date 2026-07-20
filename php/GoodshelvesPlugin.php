@@ -37,10 +37,13 @@ class GoodshelvesPlugin {
 	}
 
 	public function shortcode( array $attributes ) {
-		$attributes = shortcode_atts( array(
-			'shelf' => null,
-			'user' => '',
-		), $attributes );
+		$attributes = shortcode_atts(
+			[
+				'shelf' => null,
+				'user' => '',
+			],
+			$attributes
+		);
 
 		// TODO Sanitize user ID/name?
 		$user_id = (int) $attributes['user'];
@@ -91,5 +94,4 @@ class GoodshelvesPlugin {
 			implode( '', $html )
 		);
 	}
-
 }
