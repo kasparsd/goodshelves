@@ -25,7 +25,8 @@
     "wpackagist-theme/twentytwentyfive": "^1.5",
     "wpackagist-plugin/query-monitor": "^4.0",
     "wp-coding-standards/wpcs": "^3.4",
-    "phpcompatibility/phpcompatibility-wp": "^3.0@dev"
+    "phpcompatibility/phpcompatibility-wp": "^3.0@dev",
+    "phpstan/phpstan": "^2.2"
   },
   "config": {
     "platform": {
@@ -38,7 +39,12 @@
     }
   },
   "scripts": {
-    "lint": "phpcs",
+    "lint": [
+      "@lint:phpcs",
+      "@lint:phpstan"
+    ],
+    "lint:phpcs": "phpcs",
+    "lint:phpstan": "phpstan analyse",
     "format": "phpcbf"
   }
 }
