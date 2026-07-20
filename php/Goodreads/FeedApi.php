@@ -21,7 +21,7 @@ class FeedApi {
 		$feed = fetch_feed( $url ); // Rely on 12h cache by WP core around this.
 
 		if ( is_wp_error( $feed ) ) {
-			throw new \RuntimeException( sprintf( 'Failed to fetch feed: %s', $feed->get_error_message() ) );
+			throw new \RuntimeException( sprintf( 'Failed to fetch: %s', $feed->get_error_message() ) );
 		}
 
 		return $feed;
