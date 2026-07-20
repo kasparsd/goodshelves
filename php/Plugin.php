@@ -12,14 +12,14 @@ class Plugin {
 	 *
 	 * @var string
 	 */
-	protected $file;
+	protected string $file;
 
 	/**
 	 * Absolute path to the root directory of this plugin.
 	 *
 	 * @var string
 	 */
-	protected $dir;
+	protected string $dir;
 
 	/**
 	 * Store the WP uploads dir object.
@@ -27,14 +27,14 @@ class Plugin {
 	 * @see https://developer.wordpress.org/reference/functions/wp_upload_dir/
 	 * @var array
 	 */
-	protected $uploads_dir;
+	protected array $uploads_dir;
 
 	/**
 	 * Setup the plugin.
 	 *
 	 * @param string $plugin_file_path Absolute path to the main plugin file.
 	 */
-	public function __construct( $plugin_file_path ) {
+	public function __construct( string $plugin_file_path ) {
 		$this->file = $plugin_file_path;
 		$this->dir = dirname( $plugin_file_path );
 		$this->uploads_dir = wp_upload_dir( null, false ); // Don't create the time-based directory.
@@ -65,7 +65,7 @@ class Plugin {
 	 *
 	 * @return string
 	 */
-	public function basename( $file_path = null ) {
+	public function basename( ?string $file_path = null ) {
 		if ( ! isset( $file_path ) ) {
 			$file_path = $this->file();
 		}
@@ -78,7 +78,7 @@ class Plugin {
 	 *
 	 * @param string $asset_path_relative Relative path to the asset file.
 	 */
-	public function asset_url( $asset_path_relative ) {
+	public function asset_url( string $asset_path_relative ) {
 		static $plugin_basename;
 
 		// Do this only once per every request to save some processing time.
@@ -98,11 +98,11 @@ class Plugin {
 	/**
 	 * Get absolute path to a file in the uploads directory.
 	 *
-	 * @param  strign $path_relative File path relative to the root of the WordPress uploads directory.
+	 * @param string $path_relative File path relative to the root of the WordPress uploads directory.
 	 *
 	 * @return string
 	 */
-	public function uploads_dir( $path_relative = null ) {
+	public function uploads_dir( ?string $path_relative = null ) {
 		if ( isset( $path_relative ) ) {
 			return sprintf( '%s/%s', $this->uploads_dir['basedir'], $path_relative );
 		}
@@ -117,7 +117,7 @@ class Plugin {
 	 *
 	 * @return string
 	 */
-	public function uploads_dir_url( $path_relative = null ) {
+	public function uploads_dir_url( ?string $path_relative = null ) {
 		if ( isset( $path_relative ) ) {
 			return sprintf( '%s/%s', $this->uploads_dir['baseurl'], $path_relative );
 		}
@@ -128,9 +128,9 @@ class Plugin {
 	/**
 	 * Return the current version of the plugin.
 	 *
-	 * @return mixed
+	 * @return ?string
 	 */
-	public function version() {
+	public function version(): ?string {
 		return $this->meta( 'Version' );
 	}
 
@@ -141,7 +141,7 @@ class Plugin {
 	 *
 	 * @return array|string|null
 	 */
-	public function meta( $field = null ) {
+	public function meta( ?string $field = null ) {
 		static $meta;
 
 		if ( ! isset( $meta ) ) {
