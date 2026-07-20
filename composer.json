@@ -3,14 +3,29 @@
   "description": "WordPress plugin for sharing your Goodreads bookshelves",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
-  "authors": [{
-    "name": "Kaspars Dambis",
-    "email": "hi@kaspars.net"
-  }],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org",
+      "only": [
+        "wpackagist-plugin/*",
+        "wpackagist-theme/*"
+      ]
+    }
+  ],
   "autoload": {
     "psr-4": {
       "Preseto\\Goodshelves\\": "php/"
     }
   },
-  "require": {}
+  "require-dev": {
+    "roots/wordpress": "^7.0",
+    "wpackagist-theme/twentytwentyfive": "^1.5"
+  },
+  "config": {
+    "allow-plugins": {
+      "roots/wordpress-core-installer": true,
+      "composer/installers": true
+    }
+  }
 }
