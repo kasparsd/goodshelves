@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: Release version (i.e. 2.0.1)
+        required: true
+        type: string
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yaml
+
+  release:
+    name: Build and tag release
+    runs-on: ubuntu-24.04
+    needs: test
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup toolchain
+        uses: ./.github/actions/setup-toolchain
+
+      - name: Release build
+        run: npm run release
+
+      - name: Setup Git identity
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Push a release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="${{ inputs.release_version }}"
+
+          git add --force vendor build
+          git commit --message "Release ${VERSION}"
+
+          git tag --force --annotate "${VERSION}" --message "Release ${VERSION}"
+          git push --force origin "refs/tags/${VERSION}"
+
+          gh release create "${VERSION}" --verify-tag --generate-notes
