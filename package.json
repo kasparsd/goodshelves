@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "devDependencies": {
+    "@wordpress/env": "^11.11.0"
+  },
+  "scripts": {
+    "env": "wp-env",
+    "start": "wp-env start --xdebug=debug,coverage",
+    "stop": "wp-env stop"
+  }
+}
