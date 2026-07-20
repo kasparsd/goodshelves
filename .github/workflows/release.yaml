@@ -40,7 +40,7 @@ jobs:
         run: |
           VERSION="${{ inputs.release_version }}"
 
-          git add --force vendor build
+          git add --force vendor
           git commit --message "Release ${VERSION}"
 
           git tag --force --annotate "${VERSION}" --message "Release ${VERSION}"
