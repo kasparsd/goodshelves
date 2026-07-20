@@ -1,13 +1,13 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/wp-env.json",
 	"core": "./wordpress",
-  "testsEnvironment": false,
-  "mappings": {
-    "wp-content/plugins/goodshelves": ".",
-    "wp-content": "./wp-content"
-  },
-  "config": {
-    "WP_DEBUG": true,
-    "WP_DEBUG_LOG": true
-  }
+	"testsEnvironment": false,
+	"mappings": {
+		"wp-content/plugins/goodshelves": ".",
+		"wp-content": "./wp-content"
+	},
+	"config": {
+		"WP_DEBUG": true,
+		"WP_DEBUG_LOG": true
+	}
 }
